@@ -1,0 +1,254 @@
+import type { CollectionConfig } from 'payload';
+import { REVALIDATE_SECRET } from '@lib/revalidate';
+
+const Services: CollectionConfig = {
+  slug: 'services',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'slug', 'order', 'updatedAt'],
+  },
+  access: {
+    read: () => true,
+    create: ({ req }) => !!req.user,
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
+  },
+  fields: [
+    {
+      name: 'title',
+      label: {
+        en: 'Title',
+        ar: 'اسم الخدمة',
+      },
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
+      name: 'slug',
+      label: {
+        en: 'URL slug',
+        ar: 'رابط الخدمة (Slug)',
+      },
+      type: 'text',
+      required: true,
+      unique: true,
+      admin: {
+        description:
+          'e.g. 360-virtual-tours, matterport-style-tours, real-estate-photography, google-maps-integration, local-seo, google-business-optimization, marketing-solutions',
+      },
+    },
+    {
+      name: 'shortDescription',
+      label: {
+        en: 'Card summary',
+        ar: 'وصف مختصر (للكارت)',
+      },
+      type: 'textarea',
+      localized: true,
+    },
+    {
+      name: 'description',
+      label: 'Full description',
+      type: 'richText',
+      localized: true,
+    },
+    {
+      name: 'heroImage',
+      label: 'Hero image',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
+      name: 'heroVideo',
+      label: 'Hero video',
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Optional looping background clip (MP4/WebM)' },
+    },
+    {
+      name: 'heroVideoUrl',
+      label: 'Hero video URL (fallback)',
+      type: 'text',
+      admin: { description: 'External MP4/WebM if not uploading a file' },
+    },
+    {
+      name: 'icon',
+      label: 'Lucide icon name',
+      type: 'text',
+      admin: { description: 'camera, map-pin, globe, etc.' },
+    },
+    {
+      name: 'features',
+      label: 'Features (for card/listing)',
+      type: 'array',
+      fields: [{ name: 'feature', type: 'text', localized: true }],
+    },
+    {
+      name: 'benefits',
+      label: 'Benefits (for detail page)',
+      type: 'array',
+      fields: [
+        { name: 'title', label: 'Benefit title', type: 'text', localized: true, required: true },
+        { name: 'description', label: 'Benefit description', type: 'textarea', localized: true },
+        { name: 'icon', label: 'Icon name', type: 'text', admin: { description: 'e.g. check, star, zap' } },
+      ],
+    },
+    {
+      name: 'process',
+      label: 'Process Steps (for detail page)',
+      type: 'array',
+      fields: [
+        { name: 'stepNumber', label: 'Step number', type: 'number' },
+        { name: 'title', label: 'Step title', type: 'text', localized: true, required: true },
+        { name: 'description', label: 'Step description', type: 'textarea', localized: true },
+        { name: 'image', label: 'Step image', type: 'upload', relationTo: 'media' },
+      ],
+    },
+    {
+      name: 'faq',
+      label: 'FAQ (Frequently Asked Questions)',
+      type: 'array',
+      fields: [
+        { name: 'question', label: 'Question', type: 'text', localized: true, required: true },
+        { name: 'answer', label: 'Answer', type: 'textarea', localized: true, required: true },
+      ],
+    },
+    {
+      name: 'gallery',
+      label: 'Gallery Images (for detail page)',
+      type: 'array',
+      fields: [
+        { name: 'image', label: 'Image', type: 'upload', relationTo: 'media', required: true },
+        { name: 'caption', label: 'Caption', type: 'text', localized: true },
+      ],
+    },
+    {
+      name: 'matterportEmbedUrl',
+      label: 'Matterport Embed URL',
+      type: 'text',
+      admin: { description: 'Optional Matterport URL for detail page embed' },
+    },
+    {
+      name: 'keywords',
+      label: 'SEO Keywords',
+      type: 'text',
+      localized: true,
+      admin: { description: 'Comma-separated keywords for search optimization' },
+    },
+    {
+      name: 'ctaLabel',
+      label: 'CTA label',
+      type: 'text',
+      localized: true,
+    },
+    {
+      name: 'ctaHref',
+      label: 'CTA link',
+      type: 'text',
+      admin: { description: 'Relative path OK, e.g. /en/contact' },
+    },
+    {
+      name: 'seo',
+      type: 'group',
+      fields: [
+        { name: 'title', label: 'SEO title', type: 'text', localized: true },
+        { name: 'description', label: 'SEO description', type: 'textarea', localized: true },
+        { name: 'ogImage', label: 'Open Graph Image', type: 'upload', relationTo: 'media' },
+      ],
+    },
+    {
+      name: 'detailStyle',
+      label: 'Detail page style',
+      type: 'group',
+      fields: [
+        {
+          name: 'themeVariant',
+          type: 'select',
+          defaultValue: 'dark',
+          options: [
+            { label: 'Dark', value: 'dark' },
+            { label: 'Light', value: 'light' },
+            { label: 'Luxury Blue', value: 'luxury-blue' },
+            { label: 'Modern Gradient', value: 'modern-gradient' },
+          ],
+        },
+        {
+          name: 'spacing',
+          type: 'select',
+          defaultValue: 'lg',
+          options: [
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'Extra Large', value: 'xl' },
+          ],
+        },
+        {
+          name: 'buttonStyle',
+          type: 'select',
+          defaultValue: 'primary',
+          options: [
+            { label: 'Primary', value: 'primary' },
+            { label: 'Outline', value: 'outline' },
+            { label: 'Ghost', value: 'ghost' },
+            { label: 'Gradient', value: 'gradient' },
+          ],
+        },
+        {
+          name: 'mediaStyle',
+          type: 'select',
+          defaultValue: 'cover',
+          options: [
+            { label: 'Cover', value: 'cover' },
+            { label: 'Contain', value: 'contain' },
+            { label: 'Cinematic', value: 'cinematic' },
+            { label: 'Rounded', value: 'rounded' },
+          ],
+        },
+        {
+          name: 'cardStyle',
+          type: 'select',
+          defaultValue: 'default',
+          options: [
+            { label: 'Default', value: 'default' },
+            { label: 'Elevated', value: 'elevated' },
+            { label: 'Outlined', value: 'outlined' },
+            { label: 'Glass', value: 'glass' },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'order',
+      label: 'Display order',
+      type: 'number',
+      defaultValue: 0,
+    },
+    {
+      name: 'isPublished',
+      label: 'Published',
+      type: 'checkbox',
+      defaultValue: true,
+    },
+  ],
+  hooks: {
+    afterChange: [
+      async () => {
+        try {
+          const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000';
+          await fetch(`${baseUrl}/api/revalidate`, {
+            method: 'POST',
+            headers: {
+              'x-revalidate-secret': REVALIDATE_SECRET,
+            },
+          });
+        } catch (error) {
+          console.error('Failed to revalidate after service change', error);
+        }
+      },
+    ],
+  },
+};
+
+export default Services;
