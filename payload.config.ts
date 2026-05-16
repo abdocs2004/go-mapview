@@ -89,6 +89,12 @@ export default buildConfig({
   },
   sharp,
   async onInit(payload) {
+    // Skip database operations during Next.js build phase
+    if (process.env.npm_lifecycle_event === 'build' || process.env.NEXT_PHASE === 'phase-production-build') {
+      console.log('[Payload Init] Skipping user creation during build phase');
+      return;
+    }
+
     // Create default admin user if none exists
     try {
       const existingUsers = await payload.find({
