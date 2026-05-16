@@ -163,6 +163,7 @@ export default function HomePageClient({ locale, heroBlock, sections, cmsService
   };
 
   const servicesRef = useRef<HTMLDivElement | null>(null);
+console.log("matterportData",matterportData);
 
   useEffect(() => {
     if (!servicesRef.current) return;
@@ -209,6 +210,8 @@ export default function HomePageClient({ locale, heroBlock, sections, cmsService
       ? hero?.secondaryCtaHref || `/${locale}/portfolio`
       : `/${locale}/${hero?.secondaryCtaHref ? hero.secondaryCtaHref.replace(/^\//, '') : 'portfolio'}`;
 
+
+      
   return (
     <>
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">

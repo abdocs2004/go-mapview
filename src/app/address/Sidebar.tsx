@@ -99,12 +99,35 @@ export default function Sidebar({ open, onClose }: Props) {
           z-index: 40;
         }
         .sidebar.open { width: 340px; }
-        .sidebar-inner { padding: 28px; display:flex; flex-direction:column; height:100%; }
+        @media (max-width: 400px) {
+          .sidebar.open { width: 100%; }
+        }
+        .sidebar-inner { 
+          padding: 28px; 
+          display: flex; 
+          flex-direction: column; 
+          height: 100%; 
+          overflow: hidden;
+        }
   .close { background:none; border:0; font-size:16px; align-self:flex-end; cursor:pointer; color:#000; }
         .logo { margin: 12px 0 20px 0 }
-        .links { display:flex; flex-direction:column; gap:18px; margin-top:12px; }
+        .links { 
+          display: flex; 
+          flex-direction: column; 
+          gap: 18px; 
+          margin-top: 12px; 
+          flex: 1; 
+          overflow-y: auto; 
+          min-height: 0;
+          padding-right: 8px; /* space for scrollbar */
+          -webkit-overflow-scrolling: touch;
+        }
+        /* Custom scrollbar for cleaner look */
+        .links::-webkit-scrollbar { width: 4px; }
+        .links::-webkit-scrollbar-track { background: transparent; }
+        .links::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
         .link { color:#111; text-decoration:none; font-size:18px; border-top:1px solid rgba(0,0,0,0.06); padding:12px 0; }
-        .social { display:flex; gap:12px; align-items:center; }
+        .social { display:flex; gap:12px; align-items:center; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06); flex-shrink: 0; }
         .social a { text-decoration:none; font-weight:bold; color:#000; display:inline-flex; align-items:center; }
         .rooms-button { background:none; border:0; text-align:left; padding:12px 0; font-size:18px; cursor:pointer; color:#111; }
   .rooms-list { list-style:none; padding:0 0 0 8px; margin:6px 0 0 0; display:flex; flex-direction:column; gap:8px; }
