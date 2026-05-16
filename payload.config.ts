@@ -64,6 +64,7 @@ export default buildConfig({
         process.env.DATABASE_URI ||
         'postgresql://postgres:password@127.0.0.1:5432/gomap',
     },
+    push: true,
   }),
   plugins: [
     cloudinaryStorage({
