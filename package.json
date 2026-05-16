@@ -8,7 +8,7 @@
     "clean": "node -e \"require('fs').rmSync('.next',{recursive:true,force:true});try{require('fs').rmSync('node_modules/.cache',{recursive:true,force:true})}catch(e){}\"",
     "db:up": "docker compose up -d postgres",
     "build": "next build",
-    "prestart": "npx tsx src/scripts/push-db.ts || true",
+    "prestart": "npx payload run src/scripts/push-db.ts || true",
     "start": "next start",
     "lint": "next lint",
     "payload": "payload",
