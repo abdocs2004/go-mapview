@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ES2022",
     "lib": [
       "ES2022",
@@ -24,6 +23,7 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@payload-config": [
         "./payload.config.ts"
