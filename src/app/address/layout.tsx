@@ -4,6 +4,8 @@ import '@/styles/globals.css'
 import { getPayloadClient } from '@lib/payload-client';
 import Script from 'next/script';
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Address - Address Jabal Omar',
 }

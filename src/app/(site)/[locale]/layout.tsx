@@ -18,6 +18,8 @@ import {
 import { fetchServices } from '@lib/payload-queries';
 import { getPayloadClient } from '@lib/payload-client';
 
+export const dynamic = 'force-dynamic';
+
 type NavigationItem = {
   label?: string;
   href?: string;

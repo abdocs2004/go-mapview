@@ -14,6 +14,8 @@ import {
   resolveMediaUrl,
 } from '@lib/seo';
 
+export const dynamic = 'force-dynamic';
+
 function mediaUrlFromValue(value: unknown): string | undefined {
   if (!value || typeof value !== 'object' || !('url' in value)) return undefined;
   const url = (value as { url?: unknown }).url;
