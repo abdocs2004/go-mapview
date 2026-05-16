@@ -1,157 +1,65 @@
-// {
-//   "compilerOptions": {
-//     "target": "ES2022",
-//     "lib": [
-//       "ES2022",
-//       "DOM",
-//       "DOM.Iterable"
-//     ],
-//     "jsx": "preserve",
-//     "module": "ESNext",
-//     "moduleResolution": "bundler",
-//     "allowJs": true,
-//     "strict": true,
-//     "noEmit": true,
-//     "esModuleInterop": true,
-//     "skipLibCheck": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "resolveJsonModule": true,
-//     "isolatedModules": true,
-//     "incremental": true,
-//     "plugins": [
-//       {
-//         "name": "next"
-//       }
-//     ],
-//     "paths": {
-//       "@payload-config": [
-//         "./payload.config.ts"
-//       ],
-//       "@/*": [
-//         "./src/*"
-//       ],
-//       "@components/*": [
-//         "./src/components/*"
-//       ],
-//       "@app/*": [
-//         "./src/app/*"
-//       ],
-//       "@lib/*": [
-//         "./src/lib/*"
-//       ],
-//       "@hooks/*": [
-//         "./src/hooks/*"
-//       ],
-//       "@types/*": [
-//         "./src/types/*"
-//       ],
-//       "@collections/*": [
-//         "./src/collections/*"
-//       ],
-//       "@globals/*": [
-//         "./src/globals/*"
-//       ]
-//     }
-//   },
-//   "include": [
-//     "**/*.ts",
-//     "**/*.tsx",
-//     "next-env.d.ts",
-//     ".next/types/**/*.ts"
-//   ],
-//   "exclude": [
-//     "node_modules"
-//   ]
-// }
-
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2022",
-
     "lib": [
       "ES2022",
       "DOM",
       "DOM.Iterable"
     ],
-
     "jsx": "preserve",
-
     "module": "ESNext",
-
-    "moduleResolution": "node",
-
-    "baseUrl": ".",
-
-    "paths": {
-      "@payload-config": [
-        "./payload.config.ts"
-      ],
-
-      "@/*": [
-        "./src/*"
-      ],
-
-      "@components/*": [
-        "./src/components/*"
-      ],
-
-      "@app/*": [
-        "./src/app/*"
-      ],
-
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-
-      "@types/*": [
-        "./src/types/*"
-      ],
-
-      "@collections/*": [
-        "./src/collections/*"
-      ],
-
-      "@globals/*": [
-        "./src/globals/*"
-      ]
-    },
-
+    "moduleResolution": "bundler",
     "allowJs": true,
-
     "strict": true,
-
     "noEmit": true,
-
     "esModuleInterop": true,
-
     "skipLibCheck": true,
-
     "forceConsistentCasingInFileNames": true,
-
     "resolveJsonModule": true,
-
     "isolatedModules": true,
-
     "incremental": true,
-
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@payload-config": [
+        "./payload.config.ts"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@collections/*": [
+        "./src/collections/*"
+      ],
+      "@globals/*": [
+        "./src/globals/*"
+      ]
+    }
   },
-
   "include": [
-    "*/.ts",
-    "*/.tsx",
+    "**/*.ts",
+    "**/*.tsx",
     "next-env.d.ts",
-    ".next/types/*/.ts"
+    ".next/types/**/*.ts"
   ],
-
   "exclude": [
     "node_modules"
   ]
