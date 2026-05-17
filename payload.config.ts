@@ -60,11 +60,8 @@ export default buildConfig({
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {
-      connectionString:
-        process.env.DATABASE_URL ||
-        'postgresql://postgres:password@127.0.0.1:5432/gomap',
-    },
-    push: true,
+      connectionString: process.env.DATABASE_URL!,
+    }
   }),
   plugins: [
     cloudinaryStorage({
