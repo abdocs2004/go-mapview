@@ -1,5 +1,5 @@
 import path from 'path';
-import { fileURLToPath, pathToFileURL } from 'url';
+import { fileURLToPath } from 'url';
 import sharp from 'sharp';
 import { buildConfig } from 'payload';
 import { postgresAdapter } from '@payloadcms/db-postgres';
@@ -61,7 +61,7 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString:
-        process.env.DATABASE_URI ||
+        process.env.DATABASE_URL ||
         'postgresql://postgres:password@127.0.0.1:5432/gomap',
     },
     push: true,
@@ -88,82 +88,137 @@ export default buildConfig({
     outputFile: path.resolve(rootDir, 'payload-types.ts'),
   },
   sharp,
+  // async onInit(payload) {
+  //   // Skip database operations during Next.js build phase
+  //   if (process.env.npm_lifecycle_event === 'build' || process.env.NEXT_PHASE === 'phase-production-build') {
+  //     console.log('[Payload Init] Skipping user creation during build phase');
+  //     return;
+  //   }
+
+  //   // Create default admin user if none exists
+  //   try {
+  //     const existingUsers = await payload.find({
+  //       collection: 'users',
+  //       limit: 1,
+  //     });
+
+  //     if (existingUsers.docs.length === 0) {
+  //       try {
+  //         await payload.create({
+  //           collection: 'users',
+  //           data: {
+  //             email: 'admin@gomapview.com',
+  //             password: 'GoMapView@2026',
+  //           },
+  //         });
+  //         console.log('[Payload Init] Created default admin user: admin@gomapview.com');
+  //       } catch (error) {
+  //         console.error('[Payload Init] Failed to create default admin user:', error);
+  //       }
+  //     }
+  //     // Create admin user from environment variables if provided
+  //     const newAdminEmail = process.env.NEW_ADMIN_EMAIL;
+  //     const newAdminPass = process.env.NEW_ADMIN_PASS;
+  //     if (newAdminEmail && newAdminPass) {
+  //       try {
+  //         const found = await payload.find({
+  //           collection: 'users',
+  //           where: {
+  //             email: {
+  //               equals: newAdminEmail,
+  //             },
+  //           },
+  //           limit: 1,
+  //         });
+
+  //         if (found.docs.length === 0) {
+  //           await payload.create({
+  //             collection: 'users',
+  //             data: {
+  //               email: newAdminEmail,
+  //               password: newAdminPass,
+  //             },
+  //           });
+  //           console.log('[Payload Init] Created NEW_ADMIN user:', newAdminEmail);
+  //         } else {
+  //           // If the user already exists, update their password to the provided one
+  //           try {
+  //             const existing = found.docs[0];
+  //             await payload.update({
+  //               collection: 'users',
+  //               id: existing.id,
+  //               data: {
+  //                 password: newAdminPass,
+  //               },
+  //             });
+  //             console.log('[Payload Init] Updated password for existing NEW_ADMIN:', newAdminEmail);
+  //           } catch (updateErr) {
+  //             console.error('[Payload Init] Failed to update NEW_ADMIN password:', updateErr);
+  //           }
+  //         }
+  //       } catch (err) {
+  //         console.error('[Payload Init] Failed to create NEW_ADMIN user:', err);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     // Silently fail if tables don't exist yet during initial setup
+  //     // Payload will retry on next startup once schema is initialized
+  //     console.debug('[Payload Init] Database not ready yet, skipping user creation');
+  //   }
+  // },
+
   async onInit(payload) {
-    // Skip database operations during Next.js build phase
-    if (process.env.npm_lifecycle_event === 'build' || process.env.NEXT_PHASE === 'phase-production-build') {
-      console.log('[Payload Init] Skipping user creation during build phase');
-      return;
+  const isBuild =
+    process.env.NEXT_PHASE === 'phase-production-build' ||
+    process.env.VERCEL_ENV === 'production_build';
+
+  if (isBuild) {
+    console.log('[Payload Init] Skipping init during build');
+    return;
+  }
+
+  try {
+    const existingUsers = await payload.find({
+      collection: 'users',
+      limit: 1,
+    });
+
+    if (existingUsers.docs.length === 0) {
+      await payload.create({
+        collection: 'users',
+        data: {
+          email: 'admin@gomapview.com',
+          password: 'GoMapView@2026',
+        },
+      });
+
+      console.log('[Payload Init] Default admin created');
     }
 
-    // Create default admin user if none exists
-    try {
-      const existingUsers = await payload.find({
+    const newAdminEmail = process.env.NEW_ADMIN_EMAIL;
+    const newAdminPass = process.env.NEW_ADMIN_PASS;
+
+    if (newAdminEmail && newAdminPass) {
+      const found = await payload.find({
         collection: 'users',
+        where: {
+          email: { equals: newAdminEmail },
+        },
         limit: 1,
       });
 
-      if (existingUsers.docs.length === 0) {
-        try {
-          await payload.create({
-            collection: 'users',
-            data: {
-              email: 'admin@gomapview.com',
-              password: 'GoMapView@2026',
-            },
-          });
-          console.log('[Payload Init] Created default admin user: admin@gomapview.com');
-        } catch (error) {
-          console.error('[Payload Init] Failed to create default admin user:', error);
-        }
+      if (!found.docs.length) {
+        await payload.create({
+          collection: 'users',
+          data: {
+            email: newAdminEmail,
+            password: newAdminPass,
+          },
+        });
       }
-      // Create admin user from environment variables if provided
-      const newAdminEmail = process.env.NEW_ADMIN_EMAIL;
-      const newAdminPass = process.env.NEW_ADMIN_PASS;
-      if (newAdminEmail && newAdminPass) {
-        try {
-          const found = await payload.find({
-            collection: 'users',
-            where: {
-              email: {
-                equals: newAdminEmail,
-              },
-            },
-            limit: 1,
-          });
-
-          if (found.docs.length === 0) {
-            await payload.create({
-              collection: 'users',
-              data: {
-                email: newAdminEmail,
-                password: newAdminPass,
-              },
-            });
-            console.log('[Payload Init] Created NEW_ADMIN user:', newAdminEmail);
-          } else {
-            // If the user already exists, update their password to the provided one
-            try {
-              const existing = found.docs[0];
-              await payload.update({
-                collection: 'users',
-                id: existing.id,
-                data: {
-                  password: newAdminPass,
-                },
-              });
-              console.log('[Payload Init] Updated password for existing NEW_ADMIN:', newAdminEmail);
-            } catch (updateErr) {
-              console.error('[Payload Init] Failed to update NEW_ADMIN password:', updateErr);
-            }
-          }
-        } catch (err) {
-          console.error('[Payload Init] Failed to create NEW_ADMIN user:', err);
-        }
-      }
-    } catch (error) {
-      // Silently fail if tables don't exist yet during initial setup
-      // Payload will retry on next startup once schema is initialized
-      console.debug('[Payload Init] Database not ready yet, skipping user creation');
     }
-  },
+  } catch (err) {
+    console.log('[Payload Init] DB not ready yet');
+  }
+}
 });

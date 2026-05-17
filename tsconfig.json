@@ -8,7 +8,7 @@
     ],
     "jsx": "preserve",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "allowJs": true,
     "strict": true,
     "noEmit": true,
