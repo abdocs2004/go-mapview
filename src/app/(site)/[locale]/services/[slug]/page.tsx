@@ -11,6 +11,7 @@ import { getSectionStyle } from '@lib/section-styles';
 import { cn } from '@lib/utils';
 import Image from 'next/image';
 import React from 'react';
+import VirtualTourEmbed from '@components/VirtualTourEmbed';
 import FAQItemClient from '@components/FAQItemClient';
 import SeoJsonLd from '@components/SeoJsonLd';
 import {
@@ -339,13 +340,13 @@ export default async function ServiceDetailPage({
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
               {locale === 'en' ? '3D Experience' : 'تجربة ثلاثية الأبعاد'}
             </h2>
-            <div className="relative w-full h-96 md:h-screen rounded-lg overflow-hidden border border-dark-700">
-              <iframe
+            <div className="w-full overflow-hidden rounded-lg border border-dark-700">
+              <VirtualTourEmbed
                 src={doc.matterportEmbedUrl}
-                title="3D Tour"
-                className="w-full h-full"
-                frameBorder="0"
-                allowFullScreen
+                locale={locale}
+                title={String(doc.title || '3D Experience')}
+                thumbnailUrl={heroImage}
+                className="border-0 rounded-none h-full"
               />
             </div>
           </Container>

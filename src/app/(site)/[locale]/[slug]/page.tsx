@@ -84,7 +84,7 @@ export default async function DynamicPage({ params }: PageProps) {
     ctaLabel: d.ctaLabel ? String(d.ctaLabel) : undefined,
     ctaHref: d.ctaHref ? String(d.ctaHref) : undefined,
   }));
-
+//  ui 
   return (
     <>
       <SeoJsonLd schemas={[]} />

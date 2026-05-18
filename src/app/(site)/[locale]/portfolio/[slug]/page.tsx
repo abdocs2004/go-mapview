@@ -9,6 +9,7 @@ import type { Locale } from '@lib/i18n';
 import { absoluteMediaUrl } from '@lib/media-url';
 import { getSectionStyle } from '@lib/section-styles';
 import { cn } from '@lib/utils';
+import VirtualTourEmbed from '@components/VirtualTourEmbed';
 
 export default async function PortfolioDetailPage({
   params,
@@ -72,8 +73,14 @@ export default async function PortfolioDetailPage({
             <h2 className="mb-6 text-2xl font-semibold">
               {locale === 'en' ? 'Embedded experience' : 'التجربة المدمجة'}
             </h2>
-            <div className="aspect-video w-full overflow-hidden rounded-2xl border border-dark-800 bg-dark-950">
-              <iframe src={embed} className="h-full w-full border-0" title="Virtual tour" allowFullScreen />
+            <div className="w-full overflow-hidden rounded-2xl border border-dark-800 bg-dark-950">
+              <VirtualTourEmbed
+                src={embed}
+                locale={locale}
+                title={String(doc.title || 'Virtual Tour')}
+                thumbnailUrl={thumb}
+                className="border-0 rounded-none h-full"
+              />
             </div>
           </Container>
         </section>
