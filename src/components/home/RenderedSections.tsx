@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MatterportShowcase from '@components/MatterportShowcase';
+import VirtualTourEmbed from '@components/VirtualTourEmbed';
 import { motion } from 'framer-motion';
 import type { Locale } from '@lib/i18n';
 import Container from '@components/Container';
@@ -323,7 +324,13 @@ export default function RenderedSections({ locale, sections, cmsServices }: Rend
                     >
                       <div className="relative aspect-video bg-black">
                         {t.embedUrl ? (
-                          <iframe src={t.embedUrl} className="absolute inset-0 h-full w-full border-0" title={t.title || 'Tour'} />
+                          <VirtualTourEmbed
+                            src={t.embedUrl}
+                            locale={locale}
+                            title={t.title || 'Tour'}
+                            thumbnailUrl={resolvePoster(t.poster)}
+                            className="border-0 rounded-none h-full"
+                          />
                         ) : resolvePoster(t.poster) ? (
                           <Image src={resolvePoster(t.poster)!} alt="" fill className="object-cover" />
                         ) : null}
