@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '@components/Container';
 import Button from '@components/Button';
 import { cn } from '@lib/utils';
+import VirtualTourEmbed from '@components/VirtualTourEmbed';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,17 +127,12 @@ export default function MatterportExperienceSection({
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          {/* Aspect ratio container for responsive iframe */}
-          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-            <iframe
-              src={matterportUrl}
-              title="Matterport Virtual Tour"
-              allowFullScreen={true}
-              allow="xr-spatial-tracking"
-              className="absolute inset-0 w-full h-full rounded-xl"
-              style={{ border: 'none' }}
-            />
-          </div>
+          <VirtualTourEmbed
+            src={matterportUrl}
+            locale={locale}
+            title={sectionTitle}
+            className="border-0 bg-transparent shadow-none hover:shadow-none rounded-none"
+          />
 
           {/* Corner glow accents */}
           <div className="absolute top-0 left-0 w-1 h-20 bg-gradient-to-b from-cyan-500/40 to-transparent rounded-full blur-sm pointer-events-none" />
