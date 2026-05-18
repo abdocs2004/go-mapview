@@ -52,67 +52,73 @@ export default function CinematicAboutSection({
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    const ctx = gsap.context(() => {
-      const q = gsap.utils.selector(section);
+    let ctx: gsap.Context;
+    const timer = setTimeout(() => {
+      ctx = gsap.context(() => {
+        const q = gsap.utils.selector(section);
 
-      // If reduced motion or mobile, skip heavy scroll-linked animations
-      if (reduceMotion || isMobile) {
-        // mobile & reduced motion: reveal content without heavy curtain animation
-        gsap.set(q('[data-about-curtain-left]'), { xPercent: -110 });
-        gsap.set(q('[data-about-curtain-right]'), { xPercent: 110 });
-        gsap.set(q('[data-about-overlay]'), { opacity: 0.12 });
-        gsap.set(q('[data-about-copy], [data-about-action], [data-about-media]'), { opacity: 1, y: 0, scale: 1 });
-        return;
-      }
+        // If reduced motion or mobile, skip heavy scroll-linked animations
+        if (reduceMotion || isMobile) {
+          // mobile & reduced motion: reveal content without heavy curtain animation
+          gsap.set(q('[data-about-curtain-left]'), { xPercent: -110 });
+          gsap.set(q('[data-about-curtain-right]'), { xPercent: 110 });
+          gsap.set(q('[data-about-overlay]'), { opacity: 0.12 });
+          gsap.set(q('[data-about-copy], [data-about-action], [data-about-media]'), { opacity: 1, y: 0, scale: 1 });
+          return;
+        }
 
-      // Dual curtain timeline: left moves left, right moves right; scrubbed to scroll
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 85%',
-          end: 'top 30%',
-          scrub: 0.6,
-        },
-      });
+        // Dual curtain timeline: left moves left, right moves right; scrubbed to scroll
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 85%',
+            end: 'top 30%',
+            scrub: 0.6,
+          },
+        });
 
-      tl.to(q('[data-about-curtain-left]'), { xPercent: -110, ease: 'power2.inOut' }, 0)
-        .to(q('[data-about-curtain-right]'), { xPercent: 110, ease: 'power2.inOut' }, 0)
-        .to(q('[data-about-overlay]'), { opacity: 0.12, ease: 'power1.out' }, 0)
-        .fromTo(
-          q('[data-about-copy]'),
-          { opacity: 0, y: 36 },
-          { opacity: 1, y: 0, stagger: 0.12, ease: 'power3.out' },
-          0.12
-        )
-        .fromTo(
-          q('[data-about-media]'),
-          { scale: 1.06, opacity: 0.7 },
-          { scale: 1, opacity: 1, ease: 'power1.out' },
-          0.22
-        )
-        .to(
-          q('[data-about-action]'),
-          { opacity: 1, y: 0, stagger: 0.08, ease: 'power3.out' },
-          0.28
-        );
+        tl.to(q('[data-about-curtain-left]'), { xPercent: -110, ease: 'power2.inOut' }, 0)
+          .to(q('[data-about-curtain-right]'), { xPercent: 110, ease: 'power2.inOut' }, 0)
+          .to(q('[data-about-overlay]'), { opacity: 0.12, ease: 'power1.out' }, 0)
+          .fromTo(
+            q('[data-about-copy]'),
+            { opacity: 0, y: 36 },
+            { opacity: 1, y: 0, stagger: 0.12, ease: 'power3.out' },
+            0.12
+          )
+          .fromTo(
+            q('[data-about-media]'),
+            { scale: 1.06, opacity: 0.7 },
+            { scale: 1, opacity: 1, ease: 'power1.out' },
+            0.22
+          )
+          .to(
+            q('[data-about-action]'),
+            { opacity: 1, y: 0, stagger: 0.08, ease: 'power3.out' },
+            0.28
+          );
 
-      // Gentle parallax for glows
-      gsap.to(q('[data-about-glow-left]'), {
-        xPercent: 6,
-        yPercent: -10,
-        ease: 'none',
-        scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
-      });
+        // Gentle parallax for glows
+        gsap.to(q('[data-about-glow-left]'), {
+          xPercent: 6,
+          yPercent: -10,
+          ease: 'none',
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
 
-      gsap.to(q('[data-about-glow-right]'), {
-        xPercent: -5,
-        yPercent: -8,
-        ease: 'none',
-        scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
-      });
-    }, section);
+        gsap.to(q('[data-about-glow-right]'), {
+          xPercent: -5,
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true },
+        });
+      }, section);
+    }, 100);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

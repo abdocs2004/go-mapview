@@ -167,36 +167,43 @@ console.log("matterportData",matterportData);
 
   useEffect(() => {
     if (!servicesRef.current) return;
-    gsap.registerPlugin(ScrollTrigger);
 
-    const section = servicesRef.current;
-    const items = section.querySelectorAll('.service-bubble-item');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    let tl: gsap.core.Timeline;
+    const timer = setTimeout(() => {
+      gsap.registerPlugin(ScrollTrigger);
 
-    if (reduceMotion || isMobile) {
-      gsap.set(items, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' });
-      return;
-    }
+      const section = servicesRef.current;
+      if (!section) return;
+      
+      const items = section.querySelectorAll('.service-bubble-item');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 88%',
-        end: 'top 35%',
-        scrub: 0.8,
-      },
-    });
+      if (reduceMotion || isMobile) {
+        gsap.set(items, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' });
+        return;
+      }
 
-    tl.fromTo(
-      items,
-      { opacity: 0, y: 28, scale: 0.96, filter: 'blur(6px)' },
-      { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', stagger: 0.22, ease: 'power3.out' }
-    );
+      tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 88%',
+          end: 'top 35%',
+          scrub: 0.8,
+        },
+      });
+
+      tl.fromTo(
+        items,
+        { opacity: 0, y: 28, scale: 0.96, filter: 'blur(6px)' },
+        { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', stagger: 0.22, ease: 'power3.out' }
+      );
+    }, 100);
 
     return () => {
+      clearTimeout(timer);
       ScrollTrigger.getAll().forEach((t) => t.kill());
-      tl.kill();
+      if (tl) tl.kill();
     };
   }, []);
 

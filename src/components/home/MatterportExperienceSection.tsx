@@ -36,46 +36,52 @@ export default function MatterportExperienceSection({
     const section = sectionRef.current;
     if (!section) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let ctx: gsap.Context;
+    const timer = setTimeout(() => {
+      gsap.registerPlugin(ScrollTrigger);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const ctx = gsap.context(() => {
-      const q = gsap.utils.selector(section);
+      ctx = gsap.context(() => {
+        const q = gsap.utils.selector(section);
 
-      if (reduceMotion) {
-        gsap.set(q('[data-matterport-frame]'), { opacity: 1, scale: 1, filter: 'blur(0px)' });
-        return;
-      }
-
-      // Animate the frame in on scroll
-      gsap.fromTo(
-        q('[data-matterport-frame]'),
-        { opacity: 0, scale: 0.97, filter: 'blur(8px)' },
-        {
-          opacity: 1,
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 75%',
-            once: true,
-          },
+        if (reduceMotion) {
+          gsap.set(q('[data-matterport-frame]'), { opacity: 1, scale: 1, filter: 'blur(0px)' });
+          return;
         }
-      );
 
-      // Subtle glow animation
-      gsap.to(q('[data-matterport-glow]'), {
-        opacity: 0.6,
-        duration: 6,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-    }, section);
+        // Animate the frame in on scroll
+        gsap.fromTo(
+          q('[data-matterport-frame]'),
+          { opacity: 0, scale: 0.97, filter: 'blur(8px)' },
+          {
+            opacity: 1,
+            scale: 1,
+            filter: 'blur(0px)',
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 75%',
+              once: true,
+            },
+          }
+        );
 
-    return () => ctx.revert();
+        // Subtle glow animation
+        gsap.to(q('[data-matterport-glow]'), {
+          opacity: 0.6,
+          duration: 6,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }, section);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, []);
 
   return (

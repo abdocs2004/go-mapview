@@ -4,6 +4,28 @@ import '@/styles/globals.css';
 import type { Metadata } from 'next';
 import { getPayloadClient } from '@lib/payload-client';
 import Script from 'next/script';
+import { Poppins, Sora, Cairo } from 'next/font/google';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sora',
+  display: 'swap',
+});
+
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-cairo',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
@@ -31,7 +53,7 @@ export default async function SiteShell({ children }: { children: React.ReactNod
   }
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${sora.variable} ${cairo.variable}`}>
       <body>
         {gtmId && (
           <>
