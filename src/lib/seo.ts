@@ -45,7 +45,10 @@ function asRecord(value: unknown): AnyRecord | null {
 }
 
 export function getSiteOrigin(): string {
-  const origin = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000';
+  const origin = process.env.NEXT_PUBLIC_SERVER_URL || 'https://gomapview.com';
+  if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+    return 'https://gomapview.com';
+  }
   return origin.replace(/\/$/, '');
 }
 

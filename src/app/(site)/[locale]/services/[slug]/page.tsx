@@ -4,13 +4,30 @@ import { notFound } from 'next/navigation';
 import Container from '@components/Container';
 import Button from '@components/Button';
 import { CMSRichText } from '@components/CMSRichText';
-import { fetchServiceBySlug } from '@lib/payload-queries';
+import { fetchServiceBySlug, fetchServices } from '@lib/payload-queries';
 import type { Locale } from '@lib/i18n';
 import { absoluteMediaUrl } from '@lib/media-url';
 import { getSectionStyle } from '@lib/section-styles';
 import { cn } from '@lib/utils';
 import Image from 'next/image';
 import React from 'react';
+
+export async function generateStaticParams() {
+  const paths: Array<{ locale: string; slug: string }> = [];
+  const [servicesEn, servicesAr] = await Promise.all([
+    fetchServices('en'),
+    fetchServices('ar'),
+  ]);
+
+  servicesEn.forEach((item) => {
+    if (item.slug) paths.push({ locale: 'en', slug: item.slug });
+  });
+  servicesAr.forEach((item) => {
+    if (item.slug) paths.push({ locale: 'ar', slug: item.slug });
+  });
+
+  return paths;
+}
 import VirtualTourEmbed from '@components/VirtualTourEmbed';
 import FAQItemClient from '@components/FAQItemClient';
 import SeoJsonLd from '@components/SeoJsonLd';

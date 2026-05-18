@@ -4,12 +4,29 @@ import { notFound } from 'next/navigation';
 import Container from '@components/Container';
 import Button from '@components/Button';
 import { CMSRichText } from '@components/CMSRichText';
-import { fetchPortfolioBySlug } from '@lib/payload-queries';
+import { fetchPortfolioBySlug, fetchPortfolio } from '@lib/payload-queries';
 import type { Locale } from '@lib/i18n';
 import { absoluteMediaUrl } from '@lib/media-url';
 import { getSectionStyle } from '@lib/section-styles';
 import { cn } from '@lib/utils';
 import VirtualTourEmbed from '@components/VirtualTourEmbed';
+
+export async function generateStaticParams() {
+  const paths: Array<{ locale: string; slug: string }> = [];
+  const [portfolioEn, portfolioAr] = await Promise.all([
+    fetchPortfolio('en'),
+    fetchPortfolio('ar'),
+  ]);
+
+  portfolioEn.forEach((item) => {
+    if (item.slug) paths.push({ locale: 'en', slug: item.slug });
+  });
+  portfolioAr.forEach((item) => {
+    if (item.slug) paths.push({ locale: 'ar', slug: item.slug });
+  });
+
+  return paths;
+}
 
 export default async function PortfolioDetailPage({
   params,
