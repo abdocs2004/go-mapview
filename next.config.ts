@@ -20,6 +20,14 @@ const nextConfig: NextConfig = {
       { pathname: '/**' },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap_index.xml',
+        destination: '/sitemap.xml',
+      },
+    ];
+  },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
