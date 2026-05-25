@@ -70,9 +70,9 @@ export default async function ContactPage({
   const heroBlock = sections.find((s) => s.blockType === 'heroImmersive');
   const contactBlock = sections.find((s) => s.blockType === 'contactBlock');
 
-  const heroStyle = getSectionStyle(heroBlock || { style: { themeVariant: 'modern-gradient', spacing: 'xl', alignment: 'center', headingSize: 'xl' } });
+  const heroStyle = getSectionStyle(heroBlock || { style: { themeVariant: 'dark', spacing: 'xl', alignment: 'center', headingSize: 'xl' } });
   const contentStyle = getSectionStyle(contactBlock || { style: { themeVariant: 'dark', spacing: 'xl' } });
-  const mapStyle = getSectionStyle({ style: { themeVariant: 'modern-gradient', spacing: 'xl' } });
+  const mapStyle = getSectionStyle({ style: { themeVariant: 'dark', spacing: 'xl' } });
   const seo = await loadSeoContext(locale);
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: locale === 'en' ? 'Home' : 'الرئيسية', item: `/${locale}` },

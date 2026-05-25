@@ -19,7 +19,7 @@ export default function VirtualTourEmbed({
   thumbnailUrl,
   className,
 }: VirtualTourEmbedProps) {
-  const [isActivated, setIsActivated] = useState(false);
+  const [isActivated, setIsActivated] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const isRTL = locale === 'ar';
 
