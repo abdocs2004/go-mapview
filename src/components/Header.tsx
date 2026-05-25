@@ -133,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({
       ? 'fixed inset-0 z-40 bg-dark-950/98'
       : styleSettings?.mobileMenuStyle === 'popover'
         ? 'absolute left-3 right-3 top-20 z-40 rounded-2xl bg-dark-950/95 border border-dark-700/50'
-        : 'fixed inset-0 top-20 md:hidden z-40 bg-dark-950/95 backdrop-blur-md border-t border-dark-700/50';
+        : 'fixed inset-0 top-20 lg:hidden z-40 bg-dark-950/95 backdrop-blur-md border-t border-dark-700/50';
 
   return (
     <>
@@ -167,7 +167,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8 lg:gap-12">
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
               {navLinks.map((link) => {
                 const hasChildren = link.children && link.children.length > 0;
                 const isOpen = activeDropdown === link.href;
@@ -222,7 +222,7 @@ const Header: React.FC<HeaderProps> = ({
               {/* Language Switcher */}
               <button
                 type="button"
-                className="p-2 rounded-lg hover:bg-dark-800 transition-colors"
+                className="p-2 rounded-lg hover:bg-dark-800 transition-colors flex items-center gap-2"
                 title="Switch Language"
                 onClick={() => {
                   const nextLocale = locale === 'en' ? 'ar' : 'en';
@@ -240,28 +240,20 @@ const Header: React.FC<HeaderProps> = ({
                 }}
               >
                 <Globe className="w-5 h-5" />
+                <span className="text-sm font-bold uppercase tracking-wider">
+                  {locale === 'en' ? 'AR' : 'EN'}
+                </span>
               </button>
 
-              {/* WhatsApp Button */}
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg hover:bg-dark-800 transition-colors"
-                title="Contact on WhatsApp"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </a>
-
               {/* CTA Button */}
-              <Link href={ctaHref} className="hidden md:block">
+              <Link href={ctaHref} className="hidden lg:block">
                 <Button size="sm">{ctaLabel}</Button>
               </Link>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 hover:bg-dark-800 rounded-lg transition-colors"
+                className="lg:hidden p-2 hover:bg-dark-800 rounded-lg transition-colors"
               >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -272,7 +264,7 @@ const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className={cn(mobileMenuClass, styleSettings?.mobileMenuStyle === 'fullscreen' ? 'pt-24' : '', styleSettings?.mobileMenuStyle === 'popover' ? 'md:hidden' : '')}>
+        <div className={cn(mobileMenuClass, styleSettings?.mobileMenuStyle === 'fullscreen' ? 'pt-24' : '', styleSettings?.mobileMenuStyle === 'popover' ? 'lg:hidden' : '')}>
           <Container className="py-8">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (

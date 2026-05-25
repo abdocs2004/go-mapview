@@ -49,8 +49,8 @@ export default async function ServicesPage({
   const pageSections = ((servicesPage as Record<string, unknown> | null)?.sections as Array<Record<string, unknown>> | undefined) || [];
   const heroBlock = pageSections.find((s) => s.blockType === 'heroImmersive');
   const ctaBlock = pageSections.find((s) => s.blockType === 'ctaBanner');
-  const heroStyle = getSectionStyle(heroBlock || { style: { themeVariant: 'modern-gradient', spacing: 'xl', alignment: 'center', headingSize: 'xl' } });
-  const ctaStyle = getSectionStyle(ctaBlock || { style: { themeVariant: 'modern-gradient', spacing: 'xl', alignment: 'center' } });
+  const heroStyle = getSectionStyle(heroBlock || { style: { themeVariant: 'dark', spacing: 'xl', alignment: 'center', headingSize: 'xl' } });
+  const ctaStyle = getSectionStyle(ctaBlock || { style: { themeVariant: 'dark', spacing: 'xl', alignment: 'center' } });
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: locale === 'en' ? 'Home' : 'الرئيسية', item: `/${locale}` },
     { name: locale === 'en' ? 'Services' : 'الخدمات', item: `/${locale}/services` },
@@ -59,9 +59,11 @@ export default async function ServicesPage({
   return (
     <>
       <SeoJsonLd schemas={[breadcrumbSchema]} />
-      <section className={cn('min-h-screen flex items-center justify-center pt-20', heroStyle.sectionClass)}>
-        <div className="absolute inset-0">
-          <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-premium-accent/20 via-transparent to-transparent rounded-full blur-3xl opacity-20" />
+      <section className={cn('min-h-screen flex items-center justify-center pt-20 relative overflow-hidden', heroStyle.sectionClass)}>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-premium-accent/15 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-500/15 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px]" />
         </div>
 
         <Container className={heroStyle.containerClass}>
