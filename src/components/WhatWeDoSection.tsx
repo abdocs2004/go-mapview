@@ -45,8 +45,8 @@ export default function WhatWeDoSection({ data, locale = 'en' }: Props) {
   return (
     <section className="py-20 md:py-32 relative">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -left-48 -top-32 w-96 h-96 bg-gradient-to-tr from-purple-500 via-pink-500 to-indigo-400 opacity-20 blur-3xl transform -rotate-12" />
-        <div className="absolute -right-48 -bottom-32 w-96 h-96 bg-gradient-to-tr from-blue-400 via-cyan-300 to-emerald-300 opacity-12 blur-3xl transform rotate-12" />
+        <div className="absolute -left-48 -top-32 w-96 h-96 bg-gradient-to-tr from-purple-500 via-pink-500 to-indigo-400 opacity-10 blur-3xl transform -rotate-12" />
+        <div className="absolute -right-48 -bottom-32 w-96 h-96 bg-gradient-to-tr from-blue-400 via-cyan-300 to-emerald-300 opacity-5 blur-3xl transform rotate-12" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">

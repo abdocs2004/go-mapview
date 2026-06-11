@@ -130,10 +130,10 @@ const Header: React.FC<HeaderProps> = ({
 
   const mobileMenuClass =
     styleSettings?.mobileMenuStyle === 'fullscreen'
-      ? 'fixed inset-0 z-40 bg-dark-950/98'
+      ? 'fixed inset-0 z-[999] bg-dark-950/98'
       : styleSettings?.mobileMenuStyle === 'popover'
-        ? 'absolute left-3 right-3 top-20 z-40 rounded-2xl bg-dark-950/95 border border-dark-700/50'
-        : 'fixed inset-0 top-20 lg:hidden z-40 bg-dark-950/95 backdrop-blur-md border-t border-dark-700/50';
+        ? 'absolute left-3 right-3 top-20 z-[999] rounded-2xl bg-dark-950/95 border border-dark-700/50'
+        : 'fixed inset-0 top-20 lg:hidden z-[999] bg-dark-950/95 backdrop-blur-md border-t border-dark-700/50';
 
   return (
     <>
