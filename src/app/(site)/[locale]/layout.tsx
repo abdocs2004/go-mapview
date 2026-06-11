@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
 import WhatsAppFloat from '@components/WhatsAppFloat';
+import StickyServicesButton from '@components/StickyServicesButton';
 import SeoJsonLd from '@components/SeoJsonLd';
 import type { Locale } from '@lib/i18n';
 import { messages } from '@lib/i18n';
@@ -303,6 +304,7 @@ export default async function LocaleLayout({
         styleSettings={{ ...footerStyle, socialIconStyle: socialStyle?.iconStyle || footerStyle?.socialIconStyle }}
       />
       <WhatsAppFloat phone={whatsapp || '+966559551559'} />
+      <StickyServicesButton />
     </>
   );
 }

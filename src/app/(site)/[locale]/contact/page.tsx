@@ -30,12 +30,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const sections = ((contactPage as Record<string, unknown> | null)?.sections as Array<Record<string, unknown>> | undefined) || [];
   const heroBlock = sections.find((s) => s.blockType === 'heroImmersive');
   const contactBlock = sections.find((s) => s.blockType === 'contactBlock');
-  const title = toStringValue(heroBlock?.title, locale === 'en' ? 'Contact' : 'اتصل بنا');
+  const title = toStringValue(heroBlock?.title, locale === 'en' ? 'Contact Us | Matterport Services Middle East' : 'اتصل بنا | خدمات ماتربورت الشرق الأوسط');
   const description = toStringValue(
     heroBlock?.subtitle,
     locale === 'en'
-      ? 'Contact GoMapView for Matterport, 360 virtual tours, photography, and Google Maps visibility.'
-      : 'تواصل مع GoMapView للجولات الافتراضية، التصوير، وتحسين الظهور على خرائط جوجل.'
+      ? 'Contact GoMapView for professional Matterport 3D virtual tours, digital twin services, and commercial photography in Saudi Arabia and the UAE.'
+      : 'تواصل مع GoMapView لخدمات ماتربورت الاحترافية والجولات الافتراضية ثلاثية الأبعاد والتوائم الرقمية في السعودية والإمارات.'
   );
   const ogImage = resolveMediaUrl((contactBlock as Record<string, unknown> | undefined)?.backgroundImage) || resolveMediaUrl(seo.site?.logo);
 

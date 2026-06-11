@@ -77,11 +77,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const defaultTitle =
     seo.site?.seo && typeof seo.site.seo === 'object' && typeof (seo.site.seo as Record<string, unknown>).defaultTitle === 'string'
       ? String((seo.site.seo as Record<string, unknown>).defaultTitle)
-      : siteName;
+      : locale === 'en'
+      ? 'Matterport 3D Virtual Tours Saudi Arabia & UAE | GoMapView'
+      : 'ماتربورت السعودية - جولات افتراضية ثلاثية الأبعاد | GoMapView';
   const defaultDescription =
     seo.site?.seo && typeof seo.site.seo === 'object' && typeof (seo.site.seo as Record<string, unknown>).defaultDescription === 'string'
       ? String((seo.site.seo as Record<string, unknown>).defaultDescription)
-      : 'Immersive capture · Matterport-grade delivery for real estate, hospitality, retail & landmarks.';
+      : locale === 'en'
+      ? 'GoMapView provides professional Matterport 3D virtual tours and digital twin services for B2B real estate, hotels, and commercial spaces across Saudi Arabia and the UAE.'
+      : 'تقدم GoMapView خدمات ماتربورت وجولات افتراضية ثلاثية الأبعاد الاحترافية للفنادق، المطاعم، والعقارات التجارية في السعودية والإمارات.';
   const ogImage =
     resolveMediaUrl(seo.site?.seo && typeof seo.site.seo === 'object' ? (seo.site.seo as Record<string, unknown>).ogImage : undefined) ||
     resolveMediaUrl(seo.site?.logo);

@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale: raw } = await params;
   const locale = (raw === 'ar' ? 'ar' : 'en') as Locale;
   const seo = await loadSeoContext(locale);
-  const title = locale === 'en' ? 'Portfolio | GoMapView' : 'الأعمال | GoMapView';
+  const title = locale === 'en' ? 'Matterport & 3D Virtual Tour Portfolio Saudi Arabia | GoMapView' : 'معرض أعمال جولات ماتربورت والتوائم الرقمية في السعودية | GoMapView';
   const description =
     locale === 'en'
-      ? 'Explore GoMapView portfolio projects, including Matterport tours, 360 experiences, photography, and drone video work.'
-      : 'استعرض مشاريع GoMapView، بما في ذلك جولات Matterport وتجارب 360 والتصوير وفيديوهات الدرون.';
+      ? 'Explore GoMapView\'s portfolio of B2B projects, featuring immersive Matterport 3D virtual tours for hotels, real estate, and commercial spaces in Saudi Arabia and the UAE.'
+      : 'استكشف سابقة أعمال GoMapView للشركات، والتي تتضمن جولات ماتربورت ثلاثية الأبعاد للفنادق والعقارات والمساحات التجارية في السعودية والإمارات.';
 
   return buildPageMetadata({
     locale,

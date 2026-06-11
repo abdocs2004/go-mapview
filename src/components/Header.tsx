@@ -173,8 +173,8 @@ const Header: React.FC<HeaderProps> = ({
                 const isOpen = activeDropdown === link.href;
 
                 return (
-                  <div 
-                    key={`${link.href}-${link.label}`} 
+                  <div
+                    key={`${link.href}-${link.label}`}
                     className="relative dropdown-container"
                   >
                     <button
@@ -197,7 +197,7 @@ const Header: React.FC<HeaderProps> = ({
                     </button>
 
                     {hasChildren && isOpen && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, y: 10, x: '-50%' }}
                         animate={{ opacity: 1, y: 0, x: '-50%' }}
                         exit={{ opacity: 0, y: 10, x: '-50%' }}
@@ -227,7 +227,7 @@ const Header: React.FC<HeaderProps> = ({
                 onClick={() => {
                   const nextLocale = locale === 'en' ? 'ar' : 'en';
                   const segments = (pathname || '').split('/').filter(Boolean);
-                  
+
                   // If we have segments and the first one is a known locale, replace it
                   if (segments.length > 0 && ['en', 'ar'].includes(segments[0])) {
                     segments[0] = nextLocale;
@@ -235,7 +235,7 @@ const Header: React.FC<HeaderProps> = ({
                     // Otherwise, prepend the next locale
                     segments.unshift(nextLocale);
                   }
-                  
+
                   router.push(`/${segments.join('/')}`);
                 }}
               >
@@ -247,7 +247,13 @@ const Header: React.FC<HeaderProps> = ({
 
               {/* CTA Button */}
               <Link href={ctaHref} className="hidden lg:block">
-                <Button size="sm">{ctaLabel}</Button>
+                <Button
+                  size="sm"
+                  className="bg-[#f5be33] !text-[#0d1627] hover:bg-[#e6b12a] transition-colors duration-300 font-bold tracking-wide border-none"
+                  style={{ backgroundImage: 'none', boxShadow: 'none' }}
+                >
+                  {ctaLabel}
+                </Button>
               </Link>
 
               {/* Mobile Menu Button */}

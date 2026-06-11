@@ -13,11 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seo = await loadSeoContext(locale);
   return buildStandalonePageMetadata({
     pathname: `/${locale}/blog`,
-    title: locale === 'ar' ? 'المدونة | GoMapView' : 'Blog | GoMapView',
+    title: locale === 'ar' ? 'المدونة | رؤى ماتربورت والتوائم الرقمية في السعودية | GoMapView' : 'Blog | Matterport & Digital Twin Insights Saudi Arabia | GoMapView',
     description:
       locale === 'ar'
-        ? 'استكشف رؤى GoMapView المميزة حول جولات Matterport الافتراضية، وجولات الضيافة 360 درجة، وإشارات ثقة Google Business، واستراتيجية التسويق المرئي.'
-        : 'Explore premium GoMapView insights on Matterport virtual tours, 360 hospitality tours, Google Business trust signals, and visual marketing strategy.',
+        ? 'استكشف رؤى GoMapView للشركات حول جولات ماتربورت الافتراضية، والتصوير العقاري، وإنشاء التوائم الرقمية للفنادق والمساحات التجارية في السعودية والإمارات.'
+        : 'Explore B2B insights from GoMapView on Matterport 3D virtual tours, commercial real estate photography, and digital twin creation for hotels in Saudi Arabia and the UAE.',
     siteName: typeof seo.site?.siteName === 'string' ? seo.site.siteName : 'GoMapView',
     ogImage: resolveMediaUrl(seo.site?.logo) || '/logo.png',
   });

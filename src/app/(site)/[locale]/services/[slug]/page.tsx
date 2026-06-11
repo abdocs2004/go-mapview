@@ -62,11 +62,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const title =
     typeof doc.seo === 'object' && doc.seo && typeof (doc.seo as Record<string, unknown>).title === 'string'
       ? String((doc.seo as Record<string, unknown>).title)
-      : String(doc.title || siteName);
+      : `${String(doc.title || 'Service')} | ${locale === 'en' ? 'Virtual Tours Saudi Arabia' : 'الجولات الافتراضية السعودية'} | GoMapView`;
   const description =
     typeof doc.seo === 'object' && doc.seo && typeof (doc.seo as Record<string, unknown>).description === 'string'
       ? String((doc.seo as Record<string, unknown>).description)
-      : plainText(doc.shortDescription) || plainText(doc.description) || '';
+      : plainText(doc.shortDescription) || plainText(doc.description) || (locale === 'en' ? 'Professional 3D virtual tour and digital twin services for businesses in Saudi Arabia.' : 'خدمات الجولات الافتراضية والتوائم الرقمية للشركات في السعودية.');
   const ogImage =
     resolveMediaUrl(
       typeof doc.seo === 'object' && doc.seo && typeof (doc.seo as Record<string, unknown>).ogImage === 'object'

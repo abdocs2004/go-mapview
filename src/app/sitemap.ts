@@ -61,10 +61,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  pages.push({ url: makeUrl('/blog'), changeFrequency: 'weekly', priority: 0.8 });
+  for (const locale of locales) {
+    pages.push({ url: makeUrl(`/${locale}/blog`), changeFrequency: 'weekly', priority: 0.8 });
+  }
 
   for (const article of blogArticles) {
-    pages.push({ url: makeUrl(`/blog/${article.slug}`), changeFrequency: 'monthly', priority: 0.7 });
+    for (const locale of locales) {
+      pages.push({ url: makeUrl(`/${locale}/blog/${article.slug}`), changeFrequency: 'monthly', priority: 0.7 });
+    }
   }
 
   return pages;

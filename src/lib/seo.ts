@@ -38,7 +38,7 @@ const LOCALIZED_LANGUAGES: Record<Locale, string> = {
   ar: 'ar-SA',
 };
 
-const SERVICE_AREAS = ['Saudi Arabia', 'Riyadh', 'Jeddah', 'Dammam', 'Middle East'];
+const SERVICE_AREAS = ['Saudi Arabia', 'Riyadh', 'Jeddah', 'Dammam', 'United Arab Emirates', 'Dubai', 'Middle East'];
 
 function asRecord(value: unknown): AnyRecord | null {
   return value && typeof value === 'object' ? (value as AnyRecord) : null;
@@ -290,12 +290,13 @@ export function buildLocalBusinessSchema(context: SeoSiteContext): SeoSchema {
     serviceArea: SERVICE_AREAS.map((name) => ({ '@type': 'Place', name })),
     knowsAbout: [
       'Matterport 3D Virtual Tours',
-      '360 Virtual Tours',
-      'Google Maps Virtual Tours',
+      'Matterport Saudi Arabia',
+      'Matterport UAE',
+      'Virtual Tours for Hotels',
+      'Virtual Tours for Restaurants',
+      'Digital Twin Services',
       'Real Estate Photography',
-      'Cinematic Drone Videos',
-      'Google Business Visibility',
-      'Interactive Property Experiences',
+      'Commercial Property Virtual Tours',
     ],
     address: address
       ? {

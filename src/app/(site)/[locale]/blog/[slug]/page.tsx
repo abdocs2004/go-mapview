@@ -120,7 +120,7 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePar
 
   return buildStandalonePageMetadata({
     pathname: `/${locale}/blog/${article.slug}`,
-    title: `${article.title[locale]} | GoMapView`,
+    title: `${article.title[locale]} | GoMapView ${locale === 'ar' ? 'السعودية' : 'Saudi Arabia'}`,
     description: article.seoDescription[locale],
     siteName: typeof seo.site?.siteName === 'string' ? seo.site.siteName : 'GoMapView',
     ogImage: article.coverImage,

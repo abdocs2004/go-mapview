@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale?: 
   const { locale: raw } = await params;
   const locale = (raw as Locale) || 'en';
   const seo = await loadSeoContext(locale);
-  const title = locale === 'en' ? 'About GoMapView' : 'عن GoMapView';
+  const title = locale === 'en' ? 'About GoMapView | Digital Twin Services & Matterport Experts Saudi Arabia' : 'عن GoMapView | خبراء ماتربورت والتوائم الرقمية في السعودية';
   const description =
     locale === 'en'
-      ? 'Discover GoMapView, a premium virtual tour and Matterport services company in Saudi Arabia and the Middle East.'
-      : 'تعرف على GoMapView، شركة متخصصة في الجولات الافتراضية وخدمات Matterport في السعودية والشرق الأوسط.';
+      ? 'Discover GoMapView, the premier provider of Matterport 3D virtual tours and digital twin services for B2B clients across Saudi Arabia and the UAE.'
+      : 'تعرف على GoMapView، المزود الرائد لخدمات ماتربورت والتوائم الرقمية والجولات الافتراضية ثلاثية الأبعاد للشركات في السعودية والإمارات.';
 
   return buildPageMetadata({
     locale,

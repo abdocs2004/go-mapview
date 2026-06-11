@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const locale = (raw === 'ar' ? 'ar' : 'en') as Locale;
   const seo = await loadSeoContext(locale);
   const siteName = typeof seo.site?.siteName === 'string' ? seo.site.siteName : 'GoMapView';
-  const title = locale === 'en' ? 'Services | GoMapView' : 'الخدمات | GoMapView';
+  const title = locale === 'en' ? 'Matterport & Virtual Tour Services Saudi Arabia | GoMapView' : 'خدمات الجولات الافتراضية وماتربورت في السعودية | GoMapView';
   const description =
     typeof seo.site?.siteDescription === 'string'
       ? seo.site.siteDescription
       : locale === 'en'
-        ? 'Explore GoMapView services: Matterport 3D virtual tours, 360 virtual tours, drone videos, photography, Google Maps and local SEO.'
-        : 'استكشف خدمات GoMapView: جولات Matterport ثلاثية الأبعاد، جولات 360، فيديوهات درون، تصوير، خرائط جوجل وتحسين محلي.';
+        ? 'Explore our premium B2B services: Matterport 3D virtual tours for hotels, virtual tours for restaurants, digital twin creation, and commercial property photography across Saudi Arabia and the UAE.'
+        : 'استكشف خدماتنا للشركات: جولات ماتربورت ثلاثية الأبعاد للفنادق، الجولات الافتراضية للمطاعم، وإنشاء التوائم الرقمية للعقارات التجارية في السعودية والإمارات.';
   const ogImage = resolveMediaUrl(seo.site?.logo);
 
   return buildPageMetadata({
