@@ -304,7 +304,7 @@ export default async function LocaleLayout({
         styleSettings={{ ...footerStyle, socialIconStyle: socialStyle?.iconStyle || footerStyle?.socialIconStyle }}
       />
       <WhatsAppFloat phone={whatsapp || '+966559551559'} />
-      <StickyServicesButton />
+      <StickyServicesButton pdfUrl={resolveMediaUrl(siteData.stickyPdf) || '/servicesdetails.pdf'} />
     </>
   );
 }

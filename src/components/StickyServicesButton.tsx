@@ -4,10 +4,11 @@ import React from 'react';
 import { FileText } from 'lucide-react';
 import { useLocale } from '@hooks/useLocale';
 
-export default function StickyServicesButton() {
+export default function StickyServicesButton({ pdfUrl }: { pdfUrl?: string }) {
   const locale = useLocale();
   const text = locale === 'ar' ? 'تفاصيل الخدمات' : 'Services Details';
   const [isOpen, setIsOpen] = React.useState(false);
+  const href = pdfUrl || '/servicesdetails.pdf';
 
   return (
     <div className="fixed z-[99] top-1/3 -translate-y-1/2 right-0 group transition-all duration-500 hover:-translate-x-3">
@@ -29,7 +30,7 @@ export default function StickyServicesButton() {
           </button>
 
           <a
-            href="/servicesdetails.pdf"
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className={`flex-1 whitespace-nowrap text-white text-sm font-bold px-4 transition-all duration-500 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}`}
@@ -41,7 +42,7 @@ export default function StickyServicesButton() {
 
         {/* Desktop Link */}
         <a
-          href="/servicesdetails.pdf"
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:flex relative bg-gradient-to-b from-cyan-600 to-blue-700 border-4 border-r-0 border-white/20 p-3 py-6 rounded-tl-[2rem] rounded-bl-[4rem] shadow-[0_5px_15px_rgba(6,182,212,0.15)] flex-col items-center gap-4 transition-all duration-300 group-hover:scale-105 group-hover:-rotate-2 origin-right"

@@ -14,6 +14,13 @@ const SiteSettings: GlobalConfig = {
     { name: 'siteDescription', type: 'textarea', localized: true },
     { name: 'logo', type: 'upload', relationTo: 'media' },
     { name: 'favicon', type: 'upload', relationTo: 'media' },
+    {
+      name: 'stickyPdf',
+      label: { en: 'Sticky button PDF', ar: 'PDF زر الخدمات الثابت' },
+      type: 'upload',
+      relationTo: 'media',
+      admin: { description: 'Upload a PDF that will be linked from the sticky services button' },
+    },
     { name: 'contactEmail', type: 'email', required: true },
     { name: 'phone', type: 'text' },
     { name: 'address', type: 'text', localized: true },
