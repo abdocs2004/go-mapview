@@ -3,17 +3,14 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
 import { useLocale } from '@hooks/useLocale';
-import { useRouter } from 'next/navigation';
 
 export default function StickyServicesButton() {
   const locale = useLocale();
-  const router = useRouter();
   const text = locale === 'ar' ? 'تفاصيل الخدمات' : 'Services Details';
 
   const handleClick = () => {
-    // Navigate to contact page for the current locale
-    const path = `/${locale}/contact`;
-    router.push(path);
+    const pdfPath = locale === 'ar' ? '/GoMapView profile Arabic 2026.pdf' : '/GoMapView English profile 2026.pdf';
+    window.open(pdfPath, '_blank');
   };
 
   return (
