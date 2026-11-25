@@ -9,17 +9,19 @@ type Props = {
 }
 
 const roomLinks = [
-  { label: 'Explore Panoramic Suite Haram View 3D', url: 'https://my.matterport.com/show/?m=EZ7qCo4GRDQ&lang=en' },
-  { label: 'Explore Premier Room Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=1d7h8PNvGTi&lang=en' },
-  { label: 'Explore Deluxe Club Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=HqUpGpGoiNL&lang=en' },
-  { label: 'Explore Deluxe Accessible room King Partial Haram View in 3D', url: 'https://my.matterport.com/show/?m=PcTB6UEjKzA&lang=en' },
-  { label: 'Explore Superior Suite Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=2qDxAHdvd3y&lang=en' },
-  { label: 'Explore Deluxe Room Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=ExhP5kXaE4E&lang=en' },
-  { label: 'Explore Deluxe Room Twin Haram in 3D', url: 'https://my.matterport.com/show/?m=y771icHsJ5c&lang=en' },
-  { label: 'Explore Deluxe Room Twin Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=aW7adyRvBe7&lang=en' },
-  { label: 'Explore 3 Bedroom Presidential Suit Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=tRfGTCVwuZt&lang=en' },
-  { label: 'Explore 4 Bedroom Penthouse Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=MpYfYBopzMs&lang=en' },
-  { label: 'Explore Junior Suite City View in 3D', url: 'https://my.matterport.com/show/?m=Sz3DmQstBKi&lang=en' },
+  { label: 'Panoramic Suite Haram View 3D', url: 'https://my.matterport.com/show/?m=EZ7qCo4GRDQ&lang=en' },
+  { label: 'Premier Room Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=1d7h8PNvGTi&lang=en' },
+  { label: 'Deluxe Club Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=HqUpGpGoiNL&lang=en' },
+  { label: 'Deluxe Accessible room King Partial Haram View in 3D', url: 'https://my.matterport.com/show/?m=PcTB6UEjKzA&lang=en' },
+  { label: 'Superior Suite Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=2qDxAHdvd3y&lang=en' },
+  { label: 'Deluxe Room Twin Partial Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=ExhP5kXaE4E&lang=en' },
+  { label: 'Deluxe Room Twin Haram in 3D', url: 'https://my.matterport.com/show/?m=y771icHsJ5c&lang=en' },
+  { label: 'Deluxe Room Twin Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=aW7adyRvBe7&lang=en' },
+  { label: '3 Bedroom Presidential Suit Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=tRfGTCVwuZt&lang=en' },
+  { label: '4 Bedroom Penthouse Kaaba View in 3D', url: 'https://my.matterport.com/show/?m=MpYfYBopzMs&lang=en' },
+  { label: 'Junior Suite City View in 3D', url: 'https://my.matterport.com/show/?m=Sz3DmQstBKi&lang=en' },
+  { label: 'Executive Suite City View in 3D', url: 'https://my.matterport.com/show/?m=QsiFqgsak9R' },
+  { label: 'Deluxe Twin Room Partial Haram View in 3D', url: 'https://my.matterport.com/show/?m=gPQLGyQi3RM' },
 ]
 
 export default function Sidebar({ open, onClose }: Props) {
